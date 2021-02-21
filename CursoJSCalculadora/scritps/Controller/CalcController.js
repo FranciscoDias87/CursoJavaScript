@@ -71,9 +71,19 @@ class CalcController {
     //e calculando com eval
     let result = eval(this._operation.join(""));
 
-    //fomando novo array com primeiro elemento sendo o result,
-    //e o segundo elemento sendo o last (ultimo carinha digitado)
-    this._operation = [result, last];
+    if (last == '%') {
+
+      result /= 100;
+
+      //fomando novo array com primeiro elemento sendo o result,      
+      this._operation = [result];
+
+    } else {
+      //fomando novo array com primeiro elemento sendo o result,
+      //e o segundo elemento sendo o last (ultimo carinha digitado)
+      this._operation = [result, last];
+    }
+
 
     //atualiza display apos calculo
     this.setLastNumberToDisplay();
