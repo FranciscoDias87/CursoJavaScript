@@ -75,10 +75,21 @@ class CalcController {
     //e o segundo elemento sendo o last (ultimo carinha digitado)
     this._operation = [result, last];
 
+    //atualiza display apos calculo
+    this.setLastNumberToDisplay();
+
   }
 
-  setLastNumberToDisplay() {
+  setLastNumberToDisplay() {//mostra numeros na tela depois do calculo
 
+    let lastNumber;
+    for (let i = this._operation.length - 1; i >= 0; i--) {
+      if (!this.isOperator(this._operation[i])) {
+        lastNumber = this._operation[i];
+        break;
+      }
+    }
+    this.displayCalc = lastNumber;
   }
 
 
@@ -95,8 +106,11 @@ class CalcController {
         console.log('Outra Coisa', value);
 
       } else {
-
+        //insere dados no array
         this.pushOperation(value);
+
+        //coloca dados na tela
+        this.setLastNumberToDisplay();
       }
 
     } else {
