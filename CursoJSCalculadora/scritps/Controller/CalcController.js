@@ -16,6 +16,40 @@ class CalcController {
     this.initKeyboard();
   }
 
+  copyToClipboard() { //Copiando dados da calculadora para area de tranferencia
+    //criando novo elemento
+    let input = document.createElement('input');
+
+    //colocando valor dentro do elemento input
+    input.value = this.displayCalc;
+
+    //inserindo dentro do body
+    document.body.appendChild(input);
+
+    //selecionando conteudo
+    input.select();
+
+    //copiando informacao selecionado para o SO
+    document.execCommand("Copy");
+
+    //tirando input da tela
+    input.remove();
+  }
+
+  pasteFromClipboard() {//copiando dados da area de transferencia para calculadora
+
+    //
+    document.addEventListener('paste', e => {
+
+      //fazendo a captura do dado selecionado
+      let text = e.clipboardData.getData('Text');
+
+      //colocando na tela
+      this.displayCalc = parseFloat(text);
+    });
+
+  }
+
   initialize() {
     this.setDisplayDateTime()
     setInterval(() => {
@@ -24,6 +58,9 @@ class CalcController {
 
     //coloca dados na tela
     this.setLastNumberToDisplay();
+
+    //coloando dados na tela da calculadora
+    this.pasteFromClipboard();
   }
 
   initKeyboard() {
@@ -50,7 +87,7 @@ class CalcController {
           break;
         case '.':
         case ',':
-          this.addDot;
+          this.addDot();
           break;
         case '0':
         case '1':
@@ -64,9 +101,12 @@ class CalcController {
         case '9':
           this.addOperation(parseInt(e.key));
           break;
+
+        case 'c':
+          if (e.ctrlKey) this.copyToClipboard();
+          break;
       }
     });
-
   }
 
   addEventListenerAll(element, events, fn) {
