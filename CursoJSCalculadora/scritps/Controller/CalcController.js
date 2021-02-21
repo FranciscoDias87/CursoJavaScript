@@ -17,6 +17,9 @@ class CalcController {
     setInterval(() => {
       this.setDisplayDateTime();
     }, 1000);
+
+    //coloca dados na tela
+    this.setLastNumberToDisplay();
   }
 
   addEventListenerAll(element, events, fn) {
@@ -30,11 +33,17 @@ class CalcController {
     //limpando tudo
     this._operation = [];
 
+    //coloca dados na tela
+    this.setLastNumberToDisplay();
+
   }
 
   cancelEntry() {
     //limpando ultimo elemento do array
     this._operation.pop();
+
+    //coloca dados na tela
+    this.setLastNumberToDisplay();
 
   }
 
@@ -99,6 +108,9 @@ class CalcController {
         break;
       }
     }
+
+    if (!lastNumber) lastNumber = 0;
+
     this.displayCalc = lastNumber;
   }
 
@@ -151,7 +163,7 @@ class CalcController {
       case 'ac':
         this.clearAll();
         break;
-      case 'ac':
+      case 'ce':
         this.cancelEntry();
         break;
       case 'soma':
