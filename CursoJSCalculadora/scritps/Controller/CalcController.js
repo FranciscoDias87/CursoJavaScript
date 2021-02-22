@@ -93,7 +93,6 @@ class CalcController {
     if (this._audioOnOff) {
       this._audio.currentTime = 0;
       this._audio.play();
-
     }
 
   }
@@ -250,7 +249,6 @@ class CalcController {
       this._operation = [result];
       if (last) this._operation.push(last);
     }
-
 
     //atualiza display apos calculo
     this.setLastNumberToDisplay();
@@ -423,7 +421,6 @@ class CalcController {
     });
   }
 
-
   setDisplayDateTime() {
     this.displayDate = this.currentDate.toLocaleDateString
       (this._locale, {
@@ -434,7 +431,6 @@ class CalcController {
 
     this.displayTime = this.currentDate.toLocaleTimeString
       (this._locale);
-
   }
 
   get displayCalc() {
