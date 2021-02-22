@@ -204,7 +204,14 @@ class CalcController {
   getResult() {
     //transformando em string com join 
     //e calculando com eval
-    return eval(this._operation.join(""));
+    //usando o try catch para tratar erros de entrada/manipulação na calculadora
+    try {
+      return eval(this._operation.join(""));
+    } catch (e) {
+      setTimeout(() => {
+        this.setError();
+      }, 1);
+    }
   }
 
   calc() {
